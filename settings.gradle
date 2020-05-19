@@ -1,0 +1,3 @@
+include ':app'
+include ':automaker_plugin'
+rootProject.name='AutoMaker'
