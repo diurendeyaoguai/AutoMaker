@@ -19,7 +19,7 @@ class DingTalkTask extends DefaultTask {
     private static String mFileName
 
     DingTalkTask() {
-        setGroup("quickRelease")
+        setGroup("automaker")
     }
 
     void init(DingTalkExtension extension, BaseVariant variant, Project project) {
@@ -35,8 +35,6 @@ class DingTalkTask extends DefaultTask {
 
     @TaskAction
     void sendMsgToDingTalk() {
-        println("UploadPlugin==========发送钉钉消息,access_token=${mExtension.access_token}")
-        def url = "https://oapi.dingtalk.com/robot/send?access_token=" + mExtension.access_token
 
         def builder = new OkHttpClient.Builder()
         builder.connectTimeout(10000, TimeUnit.MILLISECONDS)
@@ -54,16 +52,21 @@ class DingTalkTask extends DefaultTask {
                 "    }\n" +
                 "}"
         def requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), contentText)
-        def request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build()
-        def response = okHttpClient.newCall(request).execute()
-        if (response == null || response.body() == null) {
-            println("UploadPlugin==========发送钉钉消息失败")
-            return
+        mExtension.access_token.each {token->
+            println("AutoMakerPlugin==========发送钉钉消息,access_token=${token}")
+            def url = "https://oapi.dingtalk.com/robot/send?access_token=${token}"
+
+            def request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build()
+            def response = okHttpClient.newCall(request).execute()
+            if (response == null || response.body() == null) {
+                println("AutoMakerPlugin==========发送钉钉消息失败")
+                return
+            }
+            def json = response.body().string()
+            println("AutoMakerPlugin==========发送钉钉接口返回:${json}")
         }
-        def json = response.body().string()
-        println("UploadPlugin==========发送钉钉接口返回:${json}")
     }
 }

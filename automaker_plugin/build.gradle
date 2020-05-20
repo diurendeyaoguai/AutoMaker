@@ -1,6 +1,23 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    //注册bintray时的用户名
+    userOrg = 'automaker'
+    //要发布的插件的分组名，可以自己定义
+    groupId = 'com.automaker.plugin'
+    //要发布的插件的标识
+    artifactId = 'automaker-plugin'
+    //要发布的插件版本
+    publishVersion = '1.0.1'
+    //描述
+    desc = 'fast build and send dingtalk message'
+    //对应的网址，如果项目代码放在github上，可以填写github中的项目地址
+    website = 'https://github.com/diurendeyaoguai/AutoMaker.git'
+}
+
 dependencies {
     compile gradleApi()
     compile localGroovy()
@@ -13,7 +30,10 @@ repositories{
     mavenCentral()
 }
 
-uploadArchives {
+//发布命令
+//gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+
+/*uploadArchives {
     repositories {
         mavenDeployer {
             //设置插件的GAV参数
@@ -24,4 +44,4 @@ uploadArchives {
             repository(url: uri('../repo'))
         }
     }
-}
+}*/

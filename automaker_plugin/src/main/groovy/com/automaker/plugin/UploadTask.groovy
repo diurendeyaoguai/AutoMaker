@@ -18,7 +18,7 @@ class UploadTask extends DefaultTask{
     Project mProject
     UploadServerExtension mExtension
     UploadTask() {
-        setGroup("quickRelease")
+        setGroup("automaker")
     }
 
     void init(UploadServerExtension extension,BaseVariant variant, Project project){
@@ -29,7 +29,7 @@ class UploadTask extends DefaultTask{
 
     @TaskAction
     void uploadApk(){
-        println("UploadPlugin=========="+"打包结束")
+        println("AutoMakerPlugin=========="+"打包结束")
         mVariant.outputs.each {output->
             def file = new File(mVariant.getPackageApplicationProvider().get().outputDirectory,output.apkData.outputFileName)
             if(file.exists()){
@@ -39,8 +39,8 @@ class UploadTask extends DefaultTask{
     }
 
     void uploadFile(File file){
-        println("UploadPlugin=========="+file)
-        println("UploadPlugin=========="+"正在上传,上传地址${mExtension.url},文件大小${file.size()}")
+        println("AutoMakerPlugin=========="+file)
+        println("AutoMakerPlugin=========="+"正在上传,上传地址${mExtension.url},文件大小${file.size()}")
         def builder = new OkHttpClient.Builder()
         builder.connectTimeout(10000, TimeUnit.MILLISECONDS)
                 .readTimeout(10000, TimeUnit.MILLISECONDS)
@@ -62,11 +62,11 @@ class UploadTask extends DefaultTask{
         def response = okHttpClient.newCall(request).execute()
 
         if (response == null || response.body() == null) {
-            println("UploadPlugin==========apk上传失败")
+            println("AutoMakerPlugin==========apk上传失败")
             return
         }
         def json = response.body().string()
-        println("UploadPlugin==========apk上传接口返回:\n ${json}")
+        println("AutoMakerPlugin==========apk上传接口返回:\n ${json}")
         parseResult(json,file.name)
         response.close()
     }
@@ -75,7 +75,7 @@ class UploadTask extends DefaultTask{
         UploadEntity data = new GsonBuilder().serializeNulls().create().fromJson(result,UploadEntity.class)
         //def data = new Gson().fromJson(result, LinkedHashMap.class)
         if (data == null) {
-            throw new IllegalArgumentException("UploadPlugin==========上传失败")
+            throw new IllegalArgumentException("AutoMakerPlugin==========上传失败")
         }
         DingTalkTask.setUrl(data.url,fileName)
     }

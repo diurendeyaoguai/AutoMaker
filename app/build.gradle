@@ -31,6 +31,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
@@ -43,12 +49,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
-serverExtension {
-    //todo
-    url = "此处为文件服务器地址"
+buildUploadExtension {
+    //支持打对应buildType的包
+    buildType "debug"
+    //文件上传服务器
+    url "http://xxxxx"
+    //param = [name:"name",age:"age"]
 }
-talkExtension {
-    //todo
-    access_token = "钉钉机器人access_token"
-    picUrl = "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1589859804&di=0553c01847725b372eb4e1b431e49cb9&src=http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg"
+sendApkExtension {
+    //支持发消息到多个群
+    access_token = ["token1","token2"]
+    //icon地址
+    picUrl "http://xxxx"
 }
