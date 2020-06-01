@@ -1,0 +1,7 @@
+<resources>
+  <dimen name='item_emoticon_size_big'>135.1667dp</dimen>
+  <dimen name='activity_horizontal_margin'>36.0444dp</dimen>
+  <dimen name='activity_vertical_margin'>36.0444dp</dimen>
+  <dimen name='test_r'>36.0444dp</dimen>
+  <dimen name='test_sp'>36.0444sp</dimen>
+</resources>

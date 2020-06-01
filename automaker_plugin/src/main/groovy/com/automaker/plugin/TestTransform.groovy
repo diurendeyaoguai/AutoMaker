@@ -7,6 +7,7 @@ import com.android.build.api.transform.TransformException
 import com.android.build.api.transform.TransformInput
 import com.android.build.api.transform.TransformOutputProvider
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.android.utils.FileUtils
 
 class TestTransform extends Transform{
     @Override
@@ -38,6 +39,8 @@ class TestTransform extends Transform{
             }
             input.jarInputs.each {jarInput->
                 println("jarInput========="+jarInput)
+                //outputProvider.getContentLocation()
+                //FileUtils.copyFile(jarInput,)
             }
         }
     }

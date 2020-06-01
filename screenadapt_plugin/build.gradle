@@ -1,0 +1,47 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compileOnly 'com.android.tools.build:gradle:3.5.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+}
+
+repositories{
+    jcenter()
+    mavenCentral()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //设置插件的GAV参数
+            pom.groupId = 'com.screenadapt.plugin'
+            pom.artifactId = 'screenadapt-plugin'
+            pom.version = '1.0.1'
+            //文件发布到下面目录
+            repository(url: uri('../repo'))
+        }
+    }
+}
+
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    //注册bintray时的用户名
+    userOrg = 'automaker'
+    //要发布的插件的分组名，可以自己定义
+    groupId = 'com.screenadapt.plugin'
+    //要发布的插件的标识
+    artifactId = 'screenadapt-plugin'
+    //要发布的插件版本
+    publishVersion = '1.0.4'
+    //描述
+    desc = 'android screen auto match'
+    //对应的网址，如果项目代码放在github上，可以填写github中的项目地址
+    website = 'https://github.com/diurendeyaoguai/AutoMaker.git'
+}
+
+//发布命令
+//gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false

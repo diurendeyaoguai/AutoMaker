@@ -1,9 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'automaker-plugin'
+apply plugin: 'screenadapt-plugin'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
     defaultConfig {
         applicationId "com.automaker.plugin"
         minSdkVersion 19
@@ -18,7 +20,7 @@ android {
             properties.load(new FileInputStream(file("${project.projectDir}/keystore/keystore.properties")))
             keyAlias properties['keyAlias']
             keyPassword properties['keyAliasPassword']
-            storeFile file("${project.projectDir}/keystore"+properties['keyStorePath'])
+            storeFile file("${project.projectDir}/keystore" + properties['keyStorePath'])
             storePassword properties['keyStorePassword']
             v1SigningEnabled true
             v2SigningEnabled false
@@ -49,16 +51,23 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
-buildUploadExtension {
-    //支持打对应buildType的包
+/*buildUploadExtension {
+    //支持打对应buildType的包,默认release
     buildType "debug"
     //文件上传服务器
-    url "http://xxxxx"
-    //param = [name:"name",age:"age"]
-}
+    url "http://xxxx"
+}*/
 sendApkExtension {
     //支持发消息到多个群
-    access_token = ["token1","token2"]
-    //icon地址
-    picUrl "http://xxxx"
+    access_token = ["5711d9673c2f7389ab357ecaa081b3cd00ec3ba2cb7947162debccafbb56910d"]
+
+    /*http://qr.liantu.com/api.php?text=http://www.yhrc8.com
+    https://api.qrserver.com/v1/create-qr-code/?data=http://www.yhrc8.com*/
+    //生成二维码链接，默认http://qr.liantu.com/api.php?text=
+    //linkPicUrl "https://api.qrserver.com/v1/create-qr-code/?data="
+    //默认为打包分支，请设置要发送的所有机器人的keyword保持一致
+    dingKeyword "下载链接"
+}
+screenAdaptExtension {
+    //matchDp = [100,200,400]
 }

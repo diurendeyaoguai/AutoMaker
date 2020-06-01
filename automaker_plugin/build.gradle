@@ -33,7 +33,7 @@ repositories{
 //发布命令
 //gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 
-/*uploadArchives {
+uploadArchives {
     repositories {
         mavenDeployer {
             //设置插件的GAV参数
@@ -44,4 +44,4 @@ repositories{
             repository(url: uri('../repo'))
         }
     }
-}*/
+}
