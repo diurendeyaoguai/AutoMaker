@@ -53,7 +53,7 @@ class UploadPlugin implements Plugin<Project> {
                             //打包异常
                             DingTalkTask dingTalkTask = project.tasks.findByName("sendApkToDingTalk")
                             if(dingTalkTask != null) {
-                                dingTalkTask.sendTextMsg("当前打包分支:${dingTalkTask.getGitBranch()}\n打包失败:\n${exceptionDt.toString()}\n${it.failure.getCause()}")
+                                dingTalkTask.sendTextMsg("打包失败 当前打包分支:${dingTalkTask.getGitBranch()}\n${"git show --name-only --format=最近一次提交：%cn，提交时间：%ar".execute().text}\n${exceptionDt.toString()}\n${it.failure.getCause()}")
                             }
                         }
                     }
