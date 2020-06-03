@@ -55,7 +55,7 @@ class DingTalkTask extends DefaultTask {
     void sendMsgToDingTalk() {
         def date = new Date()
         def dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss")
-        sendMarkDownMsg("#### **打包通知** \n ##### 当前打包分支:${getGitBranch()} \n ##### 版本号:${mVersionName} \n ![screenshot]($mDefaultPicUrl$mUrl)\n ##### ${dateFormat.format(date)} [手动下载]($mUrl) \n")
+        //sendMarkDownMsg("#### **打包通知** \n ##### 当前打包分支:${getGitBranch()} \n ##### 版本号:${mVersionName} \n ![screenshot]($mDefaultPicUrl$mUrl)\n ##### ${dateFormat.format(date)} [手动下载]($mUrl) \n")
 
         //sendLinkMsg("$mFileName 点击下载链接下载安装包",mExtension.picUrl,mUrl)
     }

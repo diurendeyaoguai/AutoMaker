@@ -51,12 +51,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
-/*buildUploadExtension {
+buildUploadExtension {
     //支持打对应buildType的包,默认release
     buildType "debug"
     //文件上传服务器
     url "http://xxxx"
-}*/
+}
 sendApkExtension {
     //支持发消息到多个群
     access_token = ["5711d9673c2f7389ab357ecaa081b3cd00ec3ba2cb7947162debccafbb56910d"]

@@ -11,7 +11,7 @@ publish {
     //要发布的插件的标识
     artifactId = 'automaker-plugin'
     //要发布的插件版本
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.3'
     //描述
     desc = 'fast build and send dingtalk message'
     //对应的网址，如果项目代码放在github上，可以填写github中的项目地址
@@ -31,7 +31,7 @@ repositories{
 }
 
 //发布命令
-//gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+//gradle clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 
 uploadArchives {
     repositories {
